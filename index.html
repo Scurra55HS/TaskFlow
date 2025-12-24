@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskFlow</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <main class="app">
+        <h1>TaskFlow</h1>
+        <p class="subtitle">Organize suas tarefas em fluxo</p>
+
+        <!-- INPUT -->
+        <div class="add-task">
+            <input type="text" id="taskInput" placeholder="Digite uma nova tarefa e pressione Enter" />
+        </div>
+
+        <!-- BOARD -->
+        <section class="board">
+
+            <!-- COLUNA: A FAZER -->
+            <div class="column" data-status="todo">
+                <h2>A Fazer</h2>
+                <ul class="task-list" id="todo"></ul>
+            </div>
+
+            <!-- COLUNA: EM ANDAMENTO -->
+            <div class="column" data-status="doing">
+                <h2>Em Andamento</h2>
+                <ul class="task-list" id="doing"></ul>
+            </div>
+
+            <!-- COLUNA: CONCLUÍDO -->
+            <div class="column" data-status="done">
+                <h2>Concluído</h2>
+                <ul class="task-list" id="done"></ul>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
