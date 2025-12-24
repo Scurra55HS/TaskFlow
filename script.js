@@ -11,20 +11,25 @@ let tasks = JSON.parse(localStorage.getItem("taskflow-tasks")) || [];
 renderTasks();
 
 /* ---------- ADD TASK ---------- */
-taskInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter" && taskInput.value.trim()) {
-        const task = {
-            id: Date.now(),
-            text: taskInput.value.trim(),
-            status: "todo"
-        };
+const form = document.getElementById("taskForm");
 
-        tasks.push(task);
-        saveTasks();
-        renderTasks();
-        taskInput.value = "";
-    }
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (!taskInput.value.trim()) return;
+
+    const task = {
+        id: Date.now(),
+        text: taskInput.value.trim(),
+        status: "todo"
+    };
+
+    tasks.push(task);
+    saveTasks();
+    renderTasks();
+    taskInput.value = "";
 });
+
 
 /* ---------- RENDER ---------- */
 function renderTasks() {
