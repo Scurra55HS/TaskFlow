@@ -62,8 +62,9 @@ function deleteTask(id) {
     renderTasks();
 }
 
-/* ---------- DRAG & DROP ---------- */
+/* ---------- DRAG & DROP (Mouse + Touch) ---------- */
 function addDragEvents(taskEl) {
+    /* --- Desktop Drag --- */
     taskEl.addEventListener("dragstart", () => {
         taskEl.classList.add("dragging");
     });
@@ -71,9 +72,35 @@ function addDragEvents(taskEl) {
     taskEl.addEventListener("dragend", () => {
         taskEl.classList.remove("dragging");
     });
+
+    /* --- Mobile Touch Drag --- */
+    taskEl.addEventListener("touchstart", () => {
+        taskEl.classList.add("dragging");
+    });
+
+    taskEl.addEventListener("touchend", (e) => {
+        const touch = e.changedTouches[0];
+        const elemento = document.elementFromPoint(touch.clientX, touch.clientY);
+
+        const coluna = elemento.closest(".column");
+        if (!coluna) {
+            taskEl.classList.remove("dragging");
+            return;
+        }
+
+        const status = coluna.dataset.status;
+        const id = Number(taskEl.dataset.id);
+        const task = tasks.find(t => t.id === id);
+
+        task.status = status;
+        saveTasks();
+        renderTasks();
+    });
 }
 
+/* --- Áreas de Drop --- */
 Object.entries(lists).forEach(([status, list]) => {
+
     list.addEventListener("dragover", (e) => {
         e.preventDefault();
         list.classList.add("drag-over");
@@ -97,6 +124,8 @@ Object.entries(lists).forEach(([status, list]) => {
         renderTasks();
     });
 });
+
+
 
 /* ---------- STORAGE ---------- */
 function saveTasks() {
