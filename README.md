@@ -37,5 +37,3 @@ Basta arrastar uma tarefa de uma coluna para outra para atualizar seu status.
 
 ---
 
-##  Estrutura do projeto
-
